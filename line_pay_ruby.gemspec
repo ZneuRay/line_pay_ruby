@@ -9,9 +9,9 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Ray"]
   spec.email         = ["ray9015@gmail.com"]
 
-  spec.summary       = %q{TODO: Write a short summary, because RubyGems requires one.}
-  spec.description   = %q{TODO: Write a longer description or delete this line.}
-  spec.homepage      = "TODO: Put your gem's website or public repo URL here."
+  spec.summary       = %q{LINE Pay API for Ruby.}
+  spec.description   = %q{LINE Pay API for Ruby. https://pay.line.me/tw/developers/documentation/download/tech}
+  spec.homepage      = "https://github.com/ZneuRay/line-pay-ruby"
   spec.license       = "MIT"
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
