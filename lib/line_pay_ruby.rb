@@ -13,6 +13,7 @@ module LinePayRuby
 end
 
 require 'line_pay_ruby/configuration'
+require 'line_pay_ruby/base_result'
 require 'line_pay_ruby/base_request'
 require 'line_pay_ruby/payments'
 require 'line_pay_ruby/payments/confirm'

@@ -7,32 +7,46 @@ module LinePayRuby
     REQUEST_METHOD = :get
     API_VERSION = 'v2'
 
+    attr_accessor :config
+
     def initialize id=nil
       @base_id = id
     end
 
+    def config
+      @config ||= Configuration.new
+    end
+
+    def configure
+      yield config
+    end
+
     def channel_id
-      LinePayRuby.config.channel_id
+      config.channel_id || LinePayRuby.config.channel_id
     end
 
     def channel_secret
-      LinePayRuby.config.channel_secret
+      config.channel_secret || LinePayRuby.config.channel_secret
     end
 
     def device_type
-      LinePayRuby.config.merchant_device_type
+      config.merchant_device_type || LinePayRuby.config.merchant_device_type
+    end
+
+    def mode
+      config.mode || LinePayRuby.config.mode
     end
 
     def service_url
-      BaseRequest.base_url + build_path
+      base_url + build_path
     end
 
     def request(params=nil)
       send_request(self.class::REQUEST_METHOD, params)
     end
 
-    def last_result
-      @res
+    def result
+      @base_result
     end
 
     private
@@ -57,8 +71,9 @@ module LinePayRuby
       req.add_field "X-LINE-MerchantDeviceType", device_type if device_type
       req.body = params.to_json
 
-      @res = http.request(req)
-      @res
+      res = http.request(req)
+      @base_result = LinePayRuby::BaseResult.new(res)
+      @base_result
     end
 
     def build_path
@@ -67,8 +82,7 @@ module LinePayRuby
       path.join('/')
     end
 
-    def self.base_url
-      mode = LinePayRuby.config.mode
+    def base_url
       case mode
       when :real
         "https://api-pay.line.me/#{API_VERSION}/"

@@ -9,9 +9,9 @@ module LinePayRuby
     attr_accessor :mode
 
     def initialize
-      @channel_id = ''
-      @channel_secret = ''
-      @merchant_device_type = ''
+      @channel_id = nil
+      @channel_secret = nil
+      @merchant_device_type = nil
       @mode = :sandbox
     end
   end
